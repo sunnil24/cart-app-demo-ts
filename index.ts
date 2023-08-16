@@ -36,6 +36,23 @@ enum URL {
   cart = 'https://dummyjson.com/carts',
 }
 
+type DebouncedFunction<F extends (...args: any[]) => any> = (
+  ...args: Parameters<F>
+) => void;
+
+function debounce<F extends (...args: any[]) => any>(
+  func: F,
+  delay: number
+): DebouncedFunction<F> {
+  let timer: ReturnType<typeof setTimeout>;
+  return function (this: any, ...args: Parameters<F>) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
 class Product {
   productList: IProduct[];
   searchlist: IProduct[];
@@ -52,7 +69,7 @@ class Product {
     const searchWrapper = elements.querySelector('section');
     const input = searchWrapper.querySelector('input');
     const resetButton = searchWrapper.querySelector('button');
-    input.addEventListener('keyup', this.search.bind(this));
+    input.addEventListener('keyup', debounce(this.search.bind(this), 300));
     resetButton.addEventListener('click', this.resetSearch.bind(this));
 
     this.host.insertAdjacentElement('beforeend', searchWrapper);
@@ -100,7 +117,7 @@ class Product {
     const list = document.querySelector('ul');
     if (input.value) {
       const regex = new RegExp(input.value, 'i');
-      this.searchlist = this.searchlist.filter(({ title }) => {
+      this.searchlist = this.productList.filter(({ title }) => {
         return regex.test(title);
       });
     } else {
