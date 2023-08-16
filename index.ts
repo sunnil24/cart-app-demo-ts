@@ -98,7 +98,7 @@ class Product {
   createCartList(target: HTMLElement) {
     this.searchlist?.forEach(({ title, price }) => {
       const li = document.createElement('li')! as HTMLLIElement;
-      li.innerHTML = `<p>${title} <span class="green">INR ${price}</span></p>`;
+      li.innerHTML = `<p>${title} <span class="green">[@ $${price.toLocaleString()}]</span></p>`;
       target.insertAdjacentElement('beforeend', li);
     });
 

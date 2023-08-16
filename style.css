@@ -9,4 +9,9 @@ p {
 
 .green {
   color: green;
+  font-weight: bolder;
+}
+
+ul {
+  list-style: decimal;
 }
