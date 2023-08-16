@@ -15,3 +15,15 @@ p {
 ul {
   list-style: decimal;
 }
+
+.no-result-found {
+  color: red;
+  list-style: none;
+  font-weight: bold;
+}
+
+section {
+  display: flex;
+  align-content: ;
+  justify-content: center;
+}

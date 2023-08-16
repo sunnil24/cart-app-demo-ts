@@ -96,11 +96,20 @@ class Product {
   }
 
   createCartList(target: HTMLElement) {
-    this.searchlist?.forEach(({ title, price }) => {
+    target.classList.remove('no-result-found');
+    const output = this.searchlist?.map(({ title, price }) => {
       const li = document.createElement('li')! as HTMLLIElement;
       li.innerHTML = `<p>${title} <span class="green">[@ $${price.toLocaleString()}]</span></p>`;
       target.insertAdjacentElement('beforeend', li);
+      return title;
     });
+
+    if (!output.length) {
+      const li = document.createElement('li')! as HTMLLIElement;
+      li.innerHTML = 'No result found, try with something else!!';
+      target.classList.add('no-result-found');
+      target.insertAdjacentElement('beforeend', li);
+    }
 
     this.host.insertAdjacentElement('beforeend', target);
   }
