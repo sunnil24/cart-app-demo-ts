@@ -1,0 +1,12 @@
+h1,
+h2 {
+  font-family: Lato;
+}
+
+p {
+  margin: 0 0 0.5rem;
+}
+
+.green {
+  color: green;
+}
