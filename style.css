@@ -1,6 +1,7 @@
-h1,
-h2 {
-  font-family: Lato;
+body {
+  font-family: Arial, Helvetica, 'Gill Sans', 'Gill Sans MT', Calibri,
+    'Trebuchet MS', sans-serif;
+  font-size: 0.85rem;
 }
 
 p {
